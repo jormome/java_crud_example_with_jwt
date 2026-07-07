@@ -47,3 +47,9 @@ Para ejecutar localmente, configure las variables de entorno antes de iniciar la
 - `target/` ya está ignorado en `.gitignore`.
 - Se agregaron reglas para ignorar archivos de configuración local como `application-local.properties` y `.env`.
 - No se comparten credenciales sensibles en el repositorio.
+
+- [x] Arquitectura en capas (Routers, Services, Repositories)
+- [x] Autenticación JWT y Hashing
+- [x] Logging estructurado en JSON y Request ID
+- [ ] Tests unitarios y de integración con `pytest` (En proceso)
+- [ ] Dockerización de la aplicación (En proceso)
