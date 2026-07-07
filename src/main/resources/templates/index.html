@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="~{plantillas/plantilla :: head}"></head>
+
+<body>
+    <header th:replace="~{plantillas/plantilla :: header}"></header>
+
+    <section th:replace="~{plantillas/botonesAgregar :: botonesAgregar}"></section>
+    <section th:replace="~{plantillas/agregarCliente :: agregarCliente}"></section>
+    <section th:replace="~{plantillas/flashMessages :: flashMessages}"></section>
+    <section th:replace="~{plantillas/listadoClientes :: listadoClientes}"></section>
+    <section th:replace="~{plantillas/paginacion :: paginacion}"></section>
+
+    <footer th:replace="~{plantillas/plantilla :: footer}"></footer>
+
+
+    <!--codigo JS para ocultar el mensaje Success-->
+    <script>
+        // esperamos que el contenido este cargado
+        document.addEventListener('DOMContentLoaded', () => {
+            const message = document.getElementById('flash-message');
+
+            if (message) {
+                // esperamos 2 segundos y lo ocultamos
+                setTimeout(() => {
+                    // añadimos una transición suave
+                    message.style.transition = "opacity 0.5s ease";
+                    message.style.opacity = 0;
+
+                    // despues de la animacion (0.5s) eliminamos el elemento del DOM
+                    setTimeout(() => {
+                        message.remove();
+                    }, 500);
+                }, 2000);
+            }
+
+            // Mostrar modal si hay errores de validación
+            const showModal = /*[[${showModal != null}]]*/ false;
+            if (showModal) {
+                const modal = new bootstrap.Modal(document.getElementById('agregarCliente'));
+                modal.show();
+            }
+        });
+    </script>
+</body>
+
+</html>

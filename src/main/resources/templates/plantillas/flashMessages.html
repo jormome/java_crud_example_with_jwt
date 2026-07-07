@@ -1,0 +1,18 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="UTF-8" />
+    <title th:text="#{flashMessages.titulo}">Flash Messages</title>
+</head>
+
+<body>
+    <section th:fragment="flashMessages">
+        <div id="flash-message" style="color: green; background: #e0ffe0; padding: 10px; margin-bottom: 10px;"
+            th:if="${success != null}">
+            <p th:text="${success}"></p>
+        </div>
+    </section>
+</body>
+
+</html>

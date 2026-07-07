@@ -1,0 +1,83 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Listado de Clientes</title>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}" />
+</head>
+
+<body>
+    <section th:fragment="listadoClientes">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-9">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>[[#{persona.titulo.listado}]]</h4>
+                        </div>
+
+                        <div th:if="${objects != null and !objects.isEmpty()}">
+                            <table class="table table-striped">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>#</th>
+                                        <th th:text="#{persona.tabla.nombre}"></th>
+                                        <th th:text="#{persona.tabla.saldo}"></th>
+                                        <th sec:authorize="hasRole('ROLE_ADMIN')"></th>
+                                        <th sec:authorize="hasRole('ROLE_ADMIN')"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:each="object, contador : ${objects}">
+                                        <td th:text="${contador.count}">1</td>
+                                        <td th:text="${object.nombre} + ' ' + ${object.apellido}">Nombre</td>
+                                        <td th:text="${#numbers.formatDecimal(object.saldo, 1, 2) + ' €'}">Saldo</td>
+                                        <td sec:authorize="hasRole('ROLE_ADMIN')">
+                                            <a th:href="@{/personas/edit/{id}(id=${object.id})}"
+                                                class="btn btn-secondary">
+                                                <i class="fas fa-edit"></i> [[#{accion.editar}]]
+                                            </a>
+                                        </td>
+                                        <td sec:authorize="hasRole('ROLE_ADMIN')">
+                                            <a th:href="@{/personas/delete/{id}(id=${object.id})}"
+                                                class="btn btn-danger">
+                                                <i class="fas fa-trash"></i> [[#{accion.eliminar}]]
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div th:if="${objects == null or objects.isEmpty()}" class="card-body">
+                            <p class="text-muted">[[#{persona.lista-vacia}]]</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="card text-center bg-danger text-white mb-3">
+                        <div class="card-body">
+                            <h3 th:text="#{persona.saldoTotal}">Saldo Total</h3>
+                            <h4 class="display-4">
+                                <span th:text="${#numbers.formatDecimal(saldoTotal, 1, 2) + ' €'}">0.00 €</span>
+                            </h4>
+                        </div>
+                    </div>
+
+                    <div class="card text-center bg-success text-white mb-3">
+                        <div class="card-body">
+                            <h3 th:text="#{persona.totalClientes}">Total Clientes</h3>
+                            <h4 class="display-4">
+                                <i class="fa fa-users"></i> [[${page.totalElements}]]
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>

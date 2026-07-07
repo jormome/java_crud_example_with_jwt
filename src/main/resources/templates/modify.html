@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="~{plantillas/plantilla :: head}"></head>
+
+<body>
+    <header th:replace="~{plantillas/plantilla :: header}"></header>
+
+    <section th:replace="~{plantillas/editarCliente :: editarCliente}"></section>
+
+    <footer th:replace="~{plantillas/plantilla :: footer }"></footer>
+
+    <h2>[[#{persona.titulo.formulario}]]</h2>
+    <br>
+    <a href="/personas/">[[#{accion.regresar}]]</a>
+    <br><br>
+
+    <!-- th:object="${persona} asocia este formulario a la variable del contenedor spring creada en el controlador como parametro perosna -->
+    <form method="post" th:action="@{/personas/save}" th:object="${objects}">
+        <input name="id" th:field="*{idPersona}" type="hidden" />
+        <div>
+            <label>[[#{persona.tabla.nombre}]]</label>
+            <!-- con * accedemos al objeto del formulario asociado que es persona -->
+            <label>
+                <input th:field="*{nombre}" type="text" />
+            </label>
+            <span style="color:red" th:errors="*{nombre}" th:if="${#fields.hasErrors('nombre')}"></span>
+        </div>
+
+        <div>
+            <label>[[#{persona.tabla.apellido}]]</label>
+            <!-- con * accedemos al objeto del formulario asociado que es persona -->
+            <input th:field="*{apellido}" type="text" />
+            <span style="color:red" th:errors="*{apellido}" th:if="${#fields.hasErrors('apellido')}"></span>
+        </div>
+
+        <div>
+            <label>[[#{persona.tabla.email}]]</label>
+            <!-- con * accedemos al objeto del formulario asociado que es persona -->
+            <input th:field="*{email}" type="text" />
+            <span style="color:red" th:errors="*{email}" th:if="${#fields.hasErrors('email')}"></span>
+        </div>
+
+        <div>
+            <label>[[#{persona.tabla.telefono}]]</label>
+            <!-- con * accedemos al objeto del formulario asociado que es persona -->
+            <input th:field="*{telefono}" type="text" />
+        </div>
+
+        <div>
+            <input th:value="#{accion.guardar}" type="submit">
+        </div>
+    </form>
+
+</body>
+
+</html>

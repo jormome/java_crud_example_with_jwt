@@ -1,0 +1,66 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="UTF-8" />
+    <title th:text="#{paginacion.titulo}">Pagination</title>
+</head>
+
+<body>
+    <section th:fragment="paginacion" class="lead text-center">
+        <br>
+        <!--paginacion-->
+        <div th:if="${page != null and page.totalPages > 0}">
+            <!-- <ul style="display: flex; list-style: none; gap: 10px;"> -->
+            <ul
+                style="display: flex; flex-direction: row; justify-content: center; list-style: none; gap: 10px; margin: 0; padding: 0;">
+                <li th:if="${page.hasPrevious()}">
+                    <a th:href="@{/{route}/(route=${baseRoute}, page=${page.number - 1}, size=${page.size})}">
+                        &laquo; [[#{accion.anterior}]]
+                    </a>
+                </li>
+
+                <li th:each="i : ${#numbers.sequence(0, page.totalPages - 1)}">
+                    <a th:href="@{/{route}/(route=${baseRoute}, page=${i}, size=${page.size})}"
+                        th:style="${i == page.number} ? 'font-weight: bold; color: red;' : ''" th:text="${i + 1}">
+                    </a>
+                </li>
+
+                <li th:if="${page.hasNext()}">
+                    <a th:href="@{/{route}/(route=${baseRoute}, page=${page.number + 1}, size=${page.size})}">
+                        [[#{accion.siguiente}]] &raquo;
+                    </a>
+                </li>
+            </ul>
+            <br>
+
+            <p>
+                Mostrando del
+                <span th:text="${page.number * page.size + 1}">1</span>
+                al
+                <span th:text="${page.number * page.size + page.numberOfElements}">5</span>
+                de [[${page.totalElements}]] registros.
+            </p>
+        </div>
+
+        <!--cambio dinamico de paginacion-->
+        <div style="margin-bottom: 15px;">
+            <form method="get" th:action="@{/{route}/(route=${baseRoute})}">
+                <label th:text="#{tabla.elementos_por_pagina}">Mostrar:</label>
+
+                <select name="size" onchange="this.form.submit()">
+                    <option th:selected="${page.size == 1}" th:value="1">1</option>
+                    <option th:selected="${page.size == 2}" th:value="2">2</option>
+                    <option th:selected="${page.size == 5}" th:value="5">5</option>
+                    <option th:selected="${page.size == 10}" th:value="10">10</option>
+                </select>
+
+                <input name="page" type="hidden" value="0" />
+
+                <input name="orderedByFieldName" th:value="${orderedByFieldName}" type="hidden" />
+            </form>
+        </div>
+    </section>
+</body>
+
+</html>

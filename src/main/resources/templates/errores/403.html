@@ -1,0 +1,16 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+    <title th:text="#{Error.403.title}">Acceso denegado</title>
+</head>
+
+<body>
+    <h1 th:text="#{Error.403.title}">Acceso denegado</h1>
+    <div th:text="#{Error.403.mensaje}">No tienes permisos para esta página.</div>
+    <br>
+    <!-- link para volver a home -->
+    <a th:href="@{/}" th:text="#{accion.regresar}">Regresar</a>
+</body>
+
+</html>

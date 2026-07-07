@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${pageTitle}">Título</title>
+</head>
+
+<body>
+
+    <section th:fragment="mensajesLogin" class="lead text-center">
+        <div th:if="${param.error}">
+            Usuario o contraseña incorrectos.
+        </div>
+        <br>
+
+        <div th:if="${param.logout}">
+            Has cerrado sesión correctamente.
+        </div>
+        <br>
+    </section>
+
+</body>
+
+</html>

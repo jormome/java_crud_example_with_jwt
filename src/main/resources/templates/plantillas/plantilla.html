@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<!-- este es el name space de seguridad para thymeleaf -->
+
+<head th:fragment="head">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plantilla</title>
+    <!-- link a bootstrap -->
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.7/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/webjars/font-awesome/6.7.2/css/all.min.css}">
+    <!-- libreria de js para bootstrap -->
+    <script th:src="@{/webjars/jquery/3.7.1/jquery.min.js}"></script>
+    <script th:src="@{/webjars/popper.js/2.11.8/umd/popper.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/5.3.7/js/bootstrap.min.js}"></script>
+</head>
+
+<body>
+    <header th:fragment="header">
+        <nav class="navbar navbar-expand-sm navbar-dark bg-dark p-0">
+            <div class="container">
+                <a class="navbar-brand" href="#" th:text="#{plantilla.titulo}">Control clientes</a>
+                <!-- este boton se mostrara si es una pantalla pequeña como un movil -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <ul class="navbar-nav">
+                        <li class="nav-item px-2">
+                            <a class="nav-link active" href="#" th:href="@{/}" th:text="#{plantilla.menu.home}">Home</a>
+                        </li>
+                    </ul>
+                    <!-- solo se mostrará si el usuario esta autenticado -->
+                    <ul class="navbar-nav ms-auto" sec:authorize="isAuthenticated()">
+                        <li class="nav-item me-3">
+                            <a class="nav-link active" href="#">
+                                <i class="fas fa-user"></i>
+                                <span th:text="#{plantilla.menu.bienvenido}">Bienvenido</span>
+                                <span sec:authentication="name">Usuario</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <form method="post" th:action="@{/logout}" sec:authorize="isAuthenticated()">
+                                <a href="#" class="nav-link" onclick="this.parentNode.submit();">
+                                    <i class="fas fa-sign-out-alt"></i>
+                                    [[#{plantilla.menu.cerrar-sesion}]]
+                                </a>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <section id="main-header" class="py-2 bg-info text-white">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h1>
+                            <i class="fas fa-cog"></i> [[#{plantilla.titulo}]]
+                        </h1>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </header>
+
+    <footer th:fragment="footer" class="bg-warning text-white mt-5 p-5">
+        <div class="container">
+            <div class="col">
+                <p class="lead text-center">
+                    <span sec:authorize="isAuthenticated()">
+                        <a th:href="@{/personas(lang=es)}">ES</a> |
+                        <a th:href="@{/personas(lang=en)}">EN</a> |
+                    </span>
+                    <span sec:authorize="isAnonymous()">
+                        <a th:href="@{/login(lang=es)}">ES</a> |
+                        <a th:href="@{/login(lang=en)}">EN</a> |
+                    </span>
+                    <span>[[#{plantilla.pie-pagina}]]</span>
+                </p>
+            </div>
+        </div>
+    </footer>
+    <!-- <h4>Pie de pagina</h4>
+        Uso inlining para mostrar el mensaje de internacionalización directamente
+        <p> [[#{plantilla.pie-pagina}]] <a href="http://www.globalmentoring.com.mx"></a> </p>
+
+        <form method="post" th:action="@{/logout}" sec:authorize="isAuthenticated()">
+            <b>User:</b> <span sec:authentication="name"></span>
+            <b>Roles:</b> <span sec:authentication="principal.authorities"></span>
+            <br><br>
+            <a href="#" onclick="this.parentNode.submit();">Logout</a>
+        </form> -->
+</body>
+
+</html>
