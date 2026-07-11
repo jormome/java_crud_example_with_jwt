@@ -4,15 +4,15 @@ Este proyecto es una aplicación web de gestión de clientes con Spring Boot, Sp
 
 ## Arquitectura
 
-- `com.curso.spring.app.AppApplication` - clase principal de arranque de Spring Boot.
-- `com.curso.spring.app.web` - controladores web, manejo de rutas y páginas.
-- `com.curso.spring.app.security` - configuración de seguridad, manejo de usuarios y roles.
-- `com.curso.spring.app.domain` - entidades JPA que representan el modelo de datos.
-- `com.curso.spring.app.dao` - repositorios de acceso a datos.
-- `com.curso.spring.app.dto` - objetos de transferencia de datos (DTOs).
-- `com.curso.spring.app.mappers` - mapeos entre entidades y DTOs con MapStruct.
-- `com.curso.spring.app.services` - lógica de negocio y servicios de la aplicación.
-- `com.curso.spring.app.utils` - utilidades y componentes compartidos.
+- `com.jmorell.spring.app.AppApplication` - clase principal de arranque de Spring Boot.
+- `com.jmorell.spring.app.web` - controladores web, manejo de rutas y páginas.
+- `com.jmorell.spring.app.security` - configuración de seguridad, manejo de usuarios y roles.
+- `com.jmorell.spring.app.domain` - entidades JPA que representan el modelo de datos.
+- `com.jmorell.spring.app.dao` - repositorios de acceso a datos.
+- `com.jmorell.spring.app.dto` - objetos de transferencia de datos (DTOs).
+- `com.jmorell.spring.app.mappers` - mapeos entre entidades y DTOs con MapStruct.
+- `com.jmorell.spring.app.services` - lógica de negocio y servicios de la aplicación.
+- `com.jmorell.spring.app.utils` - utilidades y componentes compartidos.
 
 ## Tecnologías clave
 
